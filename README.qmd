@@ -37,10 +37,8 @@ df = pq.read_table("data/df_fredmd.parquet").to_pandas()
 
 #### Estimation with maximum likelihood
 ```{python}
-import sys
-sys.path.append('src') # to find sdfm
-from sdfm import build_model
-from sdfm import mle
+from src.sdfm import build_model
+from src.sdfm import mle
 
 import jax
 import jax.numpy as jnp
@@ -55,14 +53,14 @@ slack_model = build_model(y)
 
 # estimation with maximum likelihood
 key = jax.random.PRNGKey(123)
-mle_result = mle(model=slack_model, iter=100, pertu=0.25, key=key)
+mle_result = mle(model=slack_model, iter=5, pertu=0.25, key=key)
 
 print("ML at", -mle_result.fun)
 ```
 
 #### Run the filter with the estimated parameters
 ```{python}
-from sdfm import sd_filter
+from src.sdfm import sd_filter
 estimated_filter = sd_filter(mle_result.x, slack_model)
 ```
 

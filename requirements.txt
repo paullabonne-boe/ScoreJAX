@@ -4,3 +4,4 @@ pandas
 scipy
 pyarrow
 plotnine
+tqdm
